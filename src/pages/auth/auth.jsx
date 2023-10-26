@@ -7,21 +7,10 @@ import {
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
-import SocialIcons from "../../components/navbar/socialIcons/socialIcons";
+import SocialIcons from "../../components/socialIcons/socialIcons";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
-
- 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [LoginUsername, setLoginUsername] = useState("");
-  const [loginpassword, setLoginpassword] = useState("");
-
-  const [registerUsername, setRegisterUsername] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -36,6 +25,9 @@ const Login = () => {
   };
 
   const LoginForm = () => {
+    
+  const [showPasswordLogin, setShowPasswordLogin] = useState(false);
+
     return (
       <div className="bg-white rounded-2xl shadow-2xl flex flex-col w-full max-w-md items-center mt-20 transition duration-1000 ease-out">
         <h2 className="p-3 text-4xl font-bold text-gray-600 mb-4">YBRO</h2>
@@ -55,8 +47,6 @@ const Login = () => {
               name="loginUsername"
               placeholder="Username"
               className="bg-transparent outline-none flex-1 text-gray-700"
-              value={LoginUsername}
-              onChange={(e) => setLoginUsername(e.target.value)}
             />
           </div>
           <div className="w-full bg-gray-200 h-12 my-4 rounded-full px-4 flex items-center">
@@ -64,20 +54,18 @@ const Login = () => {
               icon={faLock}
               className="text-gray-500 text-2xl mr-2"
             />
-            <div className="flex-1">
-              <input
-                type={showPassword ? "text" : "password"}
-                name="loginPassword"
-                placeholder="Password"
-                className="bg-transparent outline-none w-full text-gray-700"
-                value={loginpassword}
-                onChange={(e) => setLoginpassword(e.target.value)}
-              />
-            </div>
+            <div className="flex-1 w-full">
+  <input
+    type={showPasswordLogin ? "text" : "password"}
+    name="loginPassword"
+    placeholder="Password"
+    className="bg-transparent outline-none w-full text-gray-700"
+  />
+</div>
             <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
+              icon={showPasswordLogin ? faEyeSlash : faEye}
               className="text-gray-500 text-lg ml-2 cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setShowPasswordLogin(!showPasswordLogin)}
             />
           </div>
           <button className="w-40 h-10 bg-blue-400 border-none outline-none rounded-full text-white uppercase font-semibold my-4 cursor-pointer transition duration-500 hover:bg-blue-700">
@@ -98,6 +86,9 @@ const Login = () => {
   };
 
   const SignUpForm = () => {
+
+    const [showPasswordRegister, setShowPasswordRegister] = useState(false); // Separate state for registration form
+
     return (
       <div className="bg-gray-700 text-white rounded-2xl shadow-2xl flex flex-col w-full max-w-md items-center mt-20 transition duration-1000 ease-in">
         <h2 className="p-3 text-3xl font-bold text-white">YBRO</h2>
@@ -119,8 +110,6 @@ const Login = () => {
               name="registerUsername"
               placeholder="Username"
               className="bg-transparent outline-none flex-1 text-gray-700"
-              value={registerUsername}
-              onChange={(e) => setRegisterUsername(e.target.value)}
             />
           </div>
           <div className="w-full bg-gray-200 h-12 my-4 rounded-full px-4 flex items-center">
@@ -133,8 +122,6 @@ const Login = () => {
               name="registerEmail"
               placeholder="Email"
               className="bg-transparent outline-none flex-1 text-gray-700"
-              value={registerEmail} 
-              onChange={(e) => setRegisterEmail(e.target.value)}
             />
           </div>
           <div className="w-full bg-gray-200 h-12 my-4 rounded-full px-4 flex items-center">
@@ -144,18 +131,16 @@ const Login = () => {
             />
             <div className="flex-1">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPasswordRegister ? "text" : "password"}
                 name="registerPassword"
                 placeholder="Password"
                 className="bg-transparent outline-none w-full text-gray-700"
-                value={registerPassword}
-                onChange={(e) => setRegisterPassword(e.target.value)}
               />
             </div>
             <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
+              icon={showPasswordRegister ? faEyeSlash : faEye}
               className="text-gray-500 text-lg ml-2 cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setShowPasswordRegister(!showPasswordRegister)}
             />
           </div>
           <button className="w-40 h-10 bg-white border-none outline-none rounded-full text-blue-400 uppercase font-semibold my-4 cursor-pointer transition duration-500 hover:bg-blue-400 hover:text-white">
@@ -178,13 +163,6 @@ const Login = () => {
   return (
     <div className="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
       <div className="flex flex-col mb-52 md:flex-row items-center justify-center w-full px-2 md:px-20">
-        {/* <div className="-mb-24 md:flex-1 hidden md:flex justify-center">
-            <img
-              src={image}
-              alt="Authentication"
-              className="w-full max-w-xl md:max-w-2xl lg:max-w-3xl object-contain img"
-            />
-          </div> */}
         {isLogin ? <LoginForm /> : <SignUpForm />}
       </div>
     </div>

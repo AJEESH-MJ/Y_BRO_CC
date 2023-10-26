@@ -1,75 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { P1, P2 } from '../../assets';
+import React from "react";
+import { PG11, PG8, P8, T1 } from "../../assets/index";
+
+const Testimonial = ({ image, name, date, content }) => {
+  return (
+    <div className="container mx-auto">
+      <img src={image} alt={name} className="w-40 h-40 rounded-full mx-auto" />
+      <p className="text-center text-gray-700 mt-2 font-semibold text-2xl font-bebas-neue tracking-wider">
+        {name}
+      </p>
+      <p className="text-center text-gray-500 text-sm font-freehand">{date}</p>
+      <p className="text-center text-gray-800 mt-4 px-20 font-serif">{content}</p>
+    </div>
+  );
+};
 
 const TestimonialSection = () => {
-  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
-  const [testimonials, setTestimonials] = useState([]);
-
-  const testimonialsData = [
+  const testimonials = [
     {
-      name: "John Doe",
-      occupation: "Web Developer",
-      testimonial:
-        "This product has greatly improved my productivity. It's easy to use and has all the features I need. I highly recommend it!",
-      photo: P1, // Add the image URL for John Doe
+      image: PG11,
+      name: "Joe Hisaishi: Interview",
+      date: "October 1, 2023",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In hac habitasse platea dictumst.",
     },
     {
-      name: "Jane Smith",
-      occupation: "Graphic Designer",
-      testimonial:
-        "I've been using this tool for my design projects, and it has exceeded my expectations. The user interface is intuitive, and the results are fantastic.",
-      photo: P2, // Add the image URL for Jane Smith
+      image: PG8,
+      name: "Mind New Artworks To Your Pad",
+      date: "September 15, 2023",
+      content:
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
     {
-      name: "David Johnson",
-      occupation: "Marketing Specialist",
-      testimonial:
-        "As a marketing professional, I find this software to be a game-changer. It has helped me streamline my campaigns and achieve better results.",
-      photo: "https://example.com/david-johnson.jpg", // Add the image URL for David Johnson
+      image: P8,
+      name: "Pharell Has The Magic Touch",
+      date: "August 22, 2023",
+      content:
+        "A wonderful product and great customer service. Highly recommended!",
     },
-    // Add more testimonials here
+    {
+      image: T1,
+      name: "Life On Two Wheels",
+      date: "July 10, 2023",
+      content:
+        "I can't believe I ever shopped anywhere else. This is the best online store!",
+    },
   ];
-  
-
-  useEffect(() => {
-    // Simulating data fetching from an API or data source
-    setTestimonials(testimonialsData);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonialIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 5000); // Change the interval duration as needed (milliseconds)
-
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
 
   return (
-    <div className="bg-gradient-to-r from-purple-100 via-indigo-200 to-indigo-50 py-8">
-      <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white mb-4">Customer Testimonials</h2>
-        {testimonials.length > 0 ? (
-          <div className="flex flex-col items-center">
-            <div className="w-32 h-32 bg-white rounded-full mb-4 overflow-hidden">
-              {/* Assuming you have customer photos in the testimonial data */}
-              <img
-                src={testimonials[currentTestimonialIndex].photo}
-                alt={testimonials[currentTestimonialIndex].name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <blockquote className="text-white text-lg font-medium max-w-2xl text-center">
-              "{testimonials[currentTestimonialIndex].testimonial}"
-            </blockquote>
-            <p className="text-white mt-2">
-              - {testimonials[currentTestimonialIndex].name},{' '}
-              {testimonials[currentTestimonialIndex].occupation}
-            </p>
-          </div>
-        ) : (
-          <p className="text-white text-center">No testimonials available yet.</p>
-        )}
+    <div className="bg-white p-8">
+      <svg width="1800" height="1" xmlns="http://www.w3.org/2000/svg">
+        <line x1="200" y1="0" x2="1600" y2="0" stroke="black" stroke-width="1" />
+      </svg>
+
+      <div className="container mx-auto mt-10 mb-20">
+        <h1 className="text-3xl mb-10 font-bold font-serif text-gray-700">
+          Fresh From The Blog
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {testimonials.map((testimonial, index) => (
+            <Testimonial
+              key={index}
+              image={testimonial.image}
+              name={testimonial.name}
+              date={testimonial.date}
+              content={testimonial.content}
+            />
+          ))}
+        </div>
       </div>
+      <svg width="1800" height="1" xmlns="http://www.w3.org/2000/svg">
+        <line x1="200" y1="0" x2="1600" y2="0" stroke="black" stroke-width="1" />
+      </svg>
     </div>
   );
 };
